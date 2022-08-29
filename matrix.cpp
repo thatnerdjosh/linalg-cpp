@@ -21,12 +21,13 @@ void Matrix::_build(int* arr) {
 
 Matrix Matrix::operator*(const Matrix& other) {
     Matrix temp(rows, cols);
+    Matrix transposedOther = other.Transpose();
 
     for(int i=0; i < rows; i++) {
         for(int j=0; j < cols; j++) {
             int sum = 0;
             for (int k=0; k < rows; k++) {
-               sum += data[i*cols+k] * other.data[k*cols+j];
+               sum += data[i*cols+k] * transposedOther.data[j*cols+k];
             }
             temp.data[i*cols+j] = sum;
         }
@@ -35,7 +36,7 @@ Matrix Matrix::operator*(const Matrix& other) {
     return temp;
 }
 
-Matrix Matrix::Transpose() {
+Matrix Matrix::Transpose() const {
     int *B = new int[rows*cols];
 
     // TODO: Implement cache blocking
