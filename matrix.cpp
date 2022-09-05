@@ -35,7 +35,15 @@ Matrix Matrix::operator*(const Matrix& other) {
     return temp;
 }
 
-Matrix Matrix::Transpose() {
+std::ostream& operator<<(std::ostream& os, const Matrix& m) {
+    for(int i=0; i < m.rows; i++) {
+        for (int j=0; j < m.cols; j++)
+            os << m.ItemAt(i, j);
+        os << std::endl;
+    }
+}
+
+Matrix Matrix::Transpose() const {
     int *B = new int[rows*cols];
 
     // TODO: Implement cache blocking
@@ -54,8 +62,8 @@ Matrix::Matrix(const Matrix& other): rows(other.rows), cols(other.cols) {
     _build(other.data);
 }
 
-int Matrix::ItemAt(int col, int row) {
-    return data[col*cols+row];
+int Matrix::ItemAt(int row, int col) const {
+    return data[row*cols+col];
 }
 
 Matrix::~Matrix() {
