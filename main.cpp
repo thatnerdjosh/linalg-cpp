@@ -24,4 +24,7 @@ int main()
     for(int* piece : shapes) {
         pieces.push_back(Matrix(4, 4, piece));
     }
+
+    Matrix t = pieces.at(0).Transpose();
+    Matrix a = pieces.at(0) * t;
 }
